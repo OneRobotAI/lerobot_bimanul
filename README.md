@@ -38,6 +38,51 @@ pip install -e .
 pip install -e ".[feetech]"
 ```
 
+### Install Training Dependencies (GPU)
+
+If your GPU is an NVIDIA RTX 50 series (Blackwell architecture, e.g. RTX 5060 Ti / 5070 / 5080 / 5090), the default PyTorch build (cu126, supports only up to sm_90) **cannot run CUDA kernels** on your GPU (sm_120). Training will fail with:
+
+```
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+```
+
+You must reinstall PyTorch with the **cu128** build (CUDA 12.8+, includes sm_120 support), keeping the same version so it stays compatible with LeRobot (`torch>=2.2.1,<2.8.0`):
+
+```bash
+pip install --force-reinstall torch==2.7.1+cu128 torchvision==0.22.1+cu128 --index-url https://download.pytorch.org/whl/cu128
+```
+
+> **Mainland China**: if the download from `download.pytorch.org` is slow or keeps breaking (SSL EOF / connection reset), use the Aliyun mirror and bypass your local proxy for this command:
+>
+> ```bash
+> env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY -u all_proxy \
+> pip install --force-reinstall torch==2.7.1+cu128 torchvision==0.22.1+cu128 \
+>   --index-url https://mirrors.aliyun.com/pytorch-wheels/cu128
+> ```
+
+Verify the GPU works before training:
+
+```bash
+python -c "import torch; print(torch.__version__); x = torch.randn(1000, 1000, device='cuda'); print((x @ x).sum().item())"
+# Expected: torch 2.7.1+cu128 and a number, with NO sm_120 warning
+```
+
+### Fix `datasets` / `fsspec` Version Conflict
+
+`datasets 4.1.1` requires `fsspec[http]<=2025.9.0`. Reinstalling torch may upgrade `fsspec` to 2026.4.0, which is incompatible. Pin it back:
+
+```bash
+pip install "fsspec[http]==2025.9.0"
+```
+
+### Install Rerun (Camera Display)
+
+To see live camera feeds while teleoperating or recording (required by `--display_data=true`), install the Rerun viewer SDK:
+
+```bash
+pip install rerun-sdk
+```
+
 ## Robot Setup
 
 ### Configure the Motors
