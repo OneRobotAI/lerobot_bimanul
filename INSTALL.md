@@ -47,8 +47,8 @@ conda install ffmpeg -c conda-forge
 ## 3. 安装 LeRobot
 
 ```bash
-git clone https://github.com/AIDASLab/lerobot-so101-bimanual.git
-cd lerobot-so101-bimanual/lerobot
+git clone https://github.com/OneRobotAI/lerobot_bimanul.git
+cd lerobot_bimanul/lerobot
 pip install -e .
 pip install -e ".[feetech]"
 ```

@@ -29,8 +29,8 @@ conda install ffmpeg -c conda-forge
 First, clone the repository and navigate into the directory:
 
 ```bash
-git clone https://github.com/leehe228/lerobot-so101-bimanual.git
-cd lerobot-so101-bimanual/lerobot
+git clone https://github.com/OneRobotAI/lerobot_bimanul.git
+cd lerobot_bimanul/lerobot
 ```
 
 ```bash
