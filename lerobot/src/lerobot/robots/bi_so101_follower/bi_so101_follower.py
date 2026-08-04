@@ -20,7 +20,7 @@ from functools import cached_property
 from typing import Any
 
 from lerobot.cameras.utils import make_cameras_from_configs
-from lerobot.robots.so_follower import SO101Follower, SO101FollowerConfig
+from lerobot.robots.so101_follower import SO101Follower, SO101FollowerConfig
 
 from ..robot import Robot
 from .config_bi_so101_follower import BiSO101FollowerConfig

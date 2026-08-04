@@ -17,7 +17,7 @@
 import logging
 from functools import cached_property
 
-from lerobot.teleoperators.so_leader import SO101Leader, SO101LeaderConfig
+from lerobot.teleoperators.so101_leader import SO101Leader, SO101LeaderConfig
 
 from ..teleoperator import Teleoperator
 from .config_bi_so101_leader import BiSO101LeaderConfig
